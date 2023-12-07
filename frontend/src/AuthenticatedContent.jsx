@@ -4,7 +4,6 @@ const AuthenticatedContent = ({ accessToken }) => {
   const [secretContent, setSecretContent] = useState('');
 
   useEffect(() => {
-    // Fetch authenticated content using accessToken
     const fetchData = async () => {
       try {
         const response = await fetch('/secrets', {
