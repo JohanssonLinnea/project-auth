@@ -2,9 +2,13 @@
   "name": "project-auth-parent",
   "version": "1.0.0",
   "scripts": {
-    "postinstall": "npm install --prefix backend"
+    "postinstall": "npm install --prefix backend",
+    "start": "babel-node server.js",
+    "dev": "nodemon server.js --exec babel-node"
   },
   "dependencies": {
-    "mongoose": "^8.0.2"
+    "backend": "^0.0.0",
+    "mongoose": "^8.0.2",
+    "prefix": "^1.0.0"
   }
 }

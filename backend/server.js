@@ -41,7 +41,7 @@ const authenticateUser = async (req, res, next) => {
   if (user) {
     req.user = user;
     next();
-  } else {  
+  } else {
     res.status(403).json({ error: 'Forbidden - Invalid Access Token' });
   }
 };
@@ -57,6 +57,7 @@ app.get("/", (req, res) => {
   res.json(endpoints);
 });
 
+
 app.post('/users', async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -68,8 +69,9 @@ app.post('/users', async (req, res) => {
 
     const user = new User({ name, email, password: bcrypt.hashSync(password) });
     await user.save();
-    res.status(201).json({ id: user._id, accessToken: user.accessToken });
+    res.status(201).json({ message: 'Yay, you are now a member!', id: user._id, accessToken: user.accessToken });
   } catch (err) {
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
@@ -86,7 +88,7 @@ app.post('/sessions', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
-}); 
+});
 
 app.use('/secrets', authenticateUser);
 app.get('/secrets', (req, res) => {
